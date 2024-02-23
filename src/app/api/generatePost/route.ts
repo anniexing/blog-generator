@@ -2,21 +2,13 @@ import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { NextResponse} from 'next/server'
 import { connectDB } from '@/lib/connectedDB'
 import { openAIMain } from '@/app/api/generatePost/openaiAPI'
+import { getUserData } from '@/utils/getUserData'
 
 
 export async function POST(request: Request) {
     try{
-        const session = await getSession();
-        if(!session) {
-            throw new Error(`Requires authentication`);
-        }
-        const { user } = session;
         const {db} = await connectDB();
-        const userProfile = await db.collection('users').findOne({
-            auth0Id: user?.sub
-        }
-            );
-
+        const { userProfile }  = await getUserData();
 
         if(!userProfile?.availableTokens) {
             return NextResponse.json({}, {status: 403})

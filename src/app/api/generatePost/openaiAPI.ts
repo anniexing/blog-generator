@@ -34,7 +34,7 @@ export async function openAIMain<OpenAIProps>({topic, keywords}:OpenAIProps) {
     const titleMessages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
         ...postMessages,
         {role: 'assistant', content:postContent},
-        {role:'user', content: 'Generate a title tag for the generated blog'}
+        {role:'user', content: 'Generate a title tag for the generated blog without HTML tag'}
     ];
 
     const titleResult:OpenAI.Chat.ChatCompletion = await openai.chat.completions.create({
@@ -48,7 +48,7 @@ export async function openAIMain<OpenAIProps>({topic, keywords}:OpenAIProps) {
     const metaDescriptionMessages:OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
         ...postMessages,
         {role:'assistant', content:postContent},
-        {role:'user', content:'Generate SEO-friendly meta description content for the generated blog.'}
+        {role:'user', content:'Generate SEO-friendly meta description content for the generated blog without HTML tag'}
     ];
 
     const metaDescriptionResult:OpenAI.Chat.ChatCompletion = await openai.chat.completions.create({
