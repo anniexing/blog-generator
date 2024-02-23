@@ -18,6 +18,5 @@ export async function GET(request: NextRequest, { params }: { params: { postId: 
         postContent: post?.postContent,
         topic: post?.topic,
         keywords: post?.keywords,
-
     })
 }
