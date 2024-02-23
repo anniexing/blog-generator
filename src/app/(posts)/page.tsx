@@ -1,14 +1,11 @@
 import SideBar from '@/app/(posts)/sidebar/page'
 import NewPost from '@/app/(posts)/post/new/page'
 
-
-export default function Home() {
+export default function MainPage() {
     return (
-    <main className="w-screen h-screen">
-        <section className="grid grid-cols-[260px_1fr] gap-0">
+        <section>
             <SideBar />
             <NewPost />
         </section>
-    </main>
-  );
+    )
 }
