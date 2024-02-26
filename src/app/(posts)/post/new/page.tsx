@@ -36,7 +36,7 @@ export default function Page() {
     }
 
     return (
-        <section className="h-svh p-5 align-middle">
+        <section className="h-svh p-5 flex align-middle">
             <form onSubmit={onHandleSubmit} className="m-auto w-full max-w-screen-sm bg-slate-100 p-4 rounded-md shadow-xl border border-slate-200 shadow-slate-200 ">
                 <div>
                     <label htmlFor="topic"> Please input the topic that you want to be generated</label>

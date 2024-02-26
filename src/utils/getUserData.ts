@@ -11,9 +11,10 @@ export async function getUserData() {
     const { user }= session;
 
     const {db} = await connectDB();
-    const userProfile = await db.collection("users").findOne({
+    const filter = {
         auth0Id: user.sub
-    })
+    };
+    const userProfile = await db.collection("users").findOne(filter);
 
-    return {userProfile}
+    return {user, filter, userProfile}
 }
