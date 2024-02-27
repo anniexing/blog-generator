@@ -1,6 +1,8 @@
 'use client'
 import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation'
+import { generatePosts } from '@/services/Posts'
+import usePost from '@/hooks/usePost'
 
 export default function Page() {
     const router = useRouter();
@@ -8,30 +10,19 @@ export default function Page() {
     const [topic, setTopic] = useState('');
     const [keywords, setKeywords] = useState('');
 
+    const {dispatchGeneratePost} = usePost();
+
     const onHandleSubmit = async (event:FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setIsGenerating(true);
-        try {
-
-            const response = await fetch('/api/generatePost', {
-                method:'POST',
-                headers: {
-                    'content-type':'application/json'
-                },
-                body: JSON.stringify({topic, keywords}),
-            })
-            if (!response.ok) {
-                throw new Error('Failed to submit the data. Please try again.')
-            }
-            const data = await response.json();
+        generatePosts({topic, keywords}).then(data => {
+            dispatchGeneratePost({topic, keywords});
             if(data?.postId){
                 router.push(`/post/${data.postId}`)
             }
-        }catch (error) {
-            throw new Error('Get post error');
-        }finally {
+        }).finally(()=>{
             setIsGenerating(false);
-        }
+        })
 
     }
 
@@ -57,7 +48,8 @@ export default function Page() {
                         className="w-full block border border-slate-500 resize-none my-2 px-4 py-2 rounded-sm" />
                     <strong><small><em>Using comma to separate the keywords</em></small></strong>
                 </div>
-                <button type="submit" className="btn" disabled={!topic.trim() || !keywords.trim()}>Generate Blogs</button>
+                {isGenerating && <p>Generating Blog, Please wait ...</p>}
+                <button type="submit" className="btn" disabled={!topic.trim() || !keywords.trim() || isGenerating}>Generate Blogs</button>
             </form>
         </section>
     )

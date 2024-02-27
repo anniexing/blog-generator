@@ -1,23 +1,20 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { getPostByPostId, ParamsProps } from '@/app/(posts)/post/[postId]/services'
+import { ParamsProps } from '@/services/Posts'
 import { useParams } from 'next/navigation'
+import { IPost } from '@/models/Post'
+import usePost from '@/hooks/usePost'
 
-
-interface Post {
-    title: string;
-    metaDescription: string;
-    postContent: string;
-    keywords: string;
-    topic: string;
-
-}
 export default function PostContent(){
-  const [post, setPost] = useState<Post>();
+    const { posts }= usePost();
+  const [post, setPost] = useState<IPost>();
   const params:ParamsProps = useParams();
     useEffect(() => {
-        getPostByPostId(params).then(data => setPost(data));
-    }, [params])
+       const post = posts?.filter(post => post._id === params.postId);
+       if(post && post.length > 0){
+          setPost(post[0])
+       }
+    }, [params, posts])
         return (
             <div className="p-5">
                 <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">

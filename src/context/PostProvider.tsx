@@ -5,6 +5,7 @@ export type PostContextType = ReturnType<typeof usePostContext>
 
 const initPostContextState: PostContextType = {
     dispatch: () => {},
+    dispatchGeneratePost:() => {},
     dispatchFetchPosts: () => {},
     posts: [],
 }

@@ -1,13 +1,7 @@
-import Cors from "micro-cors";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from 'next/server'
 import stripe from "@/config/stripe";
 import { connectDB } from '@/lib/connectedDB'
-
-const cors = Cors({
-    allowMethods: ["POST", "HEAD"],
-});
-
 
 export const config = {
     api: {
@@ -22,11 +16,14 @@ const POST = async (req: NextRequest) => {
         const body = await req.text();
         const signature = headers().get("stripe-signature") || "";
         const event = stripe.webhooks.constructEvent(body, signature, endpointSecret);
-
+        console.log("event Type" + event.type);
+        let paymentIntent = null;
         switch(event.type){
             case "checkout.session.completed": {
-                const paymentIntent = event.data.object;
+                paymentIntent = event.data.object;
+
                 const auth0Id = paymentIntent.metadata?.sub;
+                console.log("auth0Id"+auth0Id);
                 const {db} = await connectDB();
                 const updateData = {
                     $inc: {
@@ -46,12 +43,12 @@ const POST = async (req: NextRequest) => {
                     updateData,
                     options
                 );
-                break;
+                return NextResponse.json({ received: true }, {status: 200});
             }
             default :
                 console.log("UNHANDLED EVENT:" + event.type);
         }
-        return NextResponse.json({ received: true });
+
     }catch (error) {
         console.error(error);
         return NextResponse.json({ message: "something went wrong", ok: false, }, { status: 500 });

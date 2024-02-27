@@ -34,7 +34,8 @@ interface FetchPostsAction {
 }
 
 interface DeletePostAction {
-    type: PostActionType.DELETE_POST
+    type: PostActionType.DELETE_POST,
+    payload?: IPost[] | undefined
 }
 
 interface AddTokensAction {

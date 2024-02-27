@@ -1,8 +1,8 @@
-'use client'
 import SideBarFooter from '@/app/(posts)/sidebar/footer'
 import Link from 'next/link'
 import { Logo } from '@/components/Logo';
 import PostList from '@/app/(posts)/sidebar/PostList'
+import AvailableTokens from '@/app/(posts)/sidebar/AvailableTokens'
 
 export default function SideBar(){
     return (
@@ -13,11 +13,9 @@ export default function SideBar(){
                    <div className="my-5">
                        <Link className='btn' href='/post/new'>New Post</Link>
                    </div>
-                   <div>
-                       <Link href="/token-topup">0 tokens available</Link>
-                   </div>
+                   <AvailableTokens />
                </div>
-               <div className='flex-1 overflow-auto p-5 pt-0'>
+               <div className='flex-1 overflow-auto p-2 pt-0'>
                <PostList />
                </div>
                <SideBarFooter />
