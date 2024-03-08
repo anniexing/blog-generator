@@ -1,20 +1,34 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { ParamsProps } from '@/services/Posts'
-import { useParams } from 'next/navigation'
+import { getPostByPostId, getPosts } from '@/services/Posts'
+import { useParams, useRouter } from 'next/navigation'
 import { IPost } from '@/models/Post'
 import usePost from '@/hooks/usePost'
+import { ParamsProps } from '@/models/Post'
 
 export default function PostContent(){
-    const { posts }= usePost();
+    const router = useRouter();
+    const { dispatchGetPostById, dispatchFetchPosts }= usePost();
   const [post, setPost] = useState<IPost>();
   const params:ParamsProps = useParams();
     useEffect(() => {
-       const post = posts?.filter(post => post._id === params.postId);
-       if(post && post.length > 0){
-          setPost(post[0])
-       }
-    }, [params, posts])
+        getPostByPostId(params).then(data => {
+         dispatchGetPostById(data)
+            if(data.isArchived) {
+                router.push("/post/new");
+            } else {
+                setPost(data)
+            }
+
+         })
+    }, [params.postId, dispatchGetPostById])
+    useEffect(() => {
+        getPosts().then(data => {
+            dispatchFetchPosts(data.posts);
+        })
+    },[])
+
+
         return (
             <div className="p-5">
                 <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">

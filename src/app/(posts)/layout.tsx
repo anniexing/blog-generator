@@ -1,8 +1,7 @@
 import React from 'react'
 import PostProvider from '@/app/PostProvider';
-import SideBar from '@/app/(posts)/sidebar/page'
-
-export default function PostsLayout({
+import SideBar from '@/app/(posts)/sidebar/SideBar'
+export default function Layout({
 children,
 }: {
     children: React.ReactNode

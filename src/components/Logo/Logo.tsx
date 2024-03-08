@@ -1,5 +1,5 @@
  export const Logo = () => {
     return (
-        <h3>Blog Generator</h3>
+        <div className="w-full items-center flex flex-1">Blog Generator</div>
     )
 }

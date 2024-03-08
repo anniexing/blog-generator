@@ -3,6 +3,7 @@ import { NextResponse} from 'next/server'
 import { connectDB } from '@/lib/connectedDB'
 import { openAIMain } from '@/app/api/generatePost/openaiAPI'
 import { getUserData } from '@/utils/getUserData'
+import { ObjectId } from 'mongodb'
 
 
 export async function POST(request: Request) {
@@ -34,9 +35,21 @@ export async function POST(request: Request) {
             topic,
             keywords,
             userId: userProfile._id,
-            created: new Date(),
+            isArchived: false,
+            created: new Date()
         })
-        return NextResponse.json({postId: post.insertedId}, {status:200})
+        return NextResponse.json({
+            postId: post.insertedId,
+            _id: new ObjectId(post.insertedId),
+            postContent: postContent || '',
+            title: title || '',
+            metaDescription: metaDescription || '',
+            topic,
+            keywords,
+            userId: userProfile._id,
+            isArchived: false,
+            created: new Date()
+        }, {status:200})
 
     }catch (e) {
         return NextResponse.json({error: "Failed to load data"}, {status:500})

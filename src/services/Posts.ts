@@ -1,5 +1,5 @@
-import { IPost } from '@/models/Post'
-export async function generatePosts({topic, keywords}:IPost) {
+import { IPost, IPostForm, ParamsProps } from '@/models/Post'
+export async function generatePost({topic, keywords}:IPostForm) {
     try {
         const response = await fetch('/api/generatePost', {
             method:'POST',
@@ -29,9 +29,7 @@ export async function getPosts() {
     }
 }
 
-export interface  ParamsProps {
-    postId?: string;
-}
+
 
 export async function getPostByPostId(params:ParamsProps){
     try {
@@ -46,6 +44,19 @@ export async function getPostByPostId(params:ParamsProps){
         console.log(e);
     }
 
+}
+
+export async function archivePost(postId:string) {
+    try {
+        const response = await fetch(`/api/archivePost/${postId}`, {method: 'POST'});
+        if(!response.ok){
+            throw new Error("Failed to get post by postId");
+        }
+        return await response.json();
+
+    }catch (e){
+        console.log(e);
+    }
 }
 
 export async function deletePost({postId}: ParamsProps) {
