@@ -1,5 +1,5 @@
 export default function NotFoundPage() {
     return (
-        <div> Can not found the page, please try again!</div>
+        <section className="h-svh w-full flex flex-1 items-center"> Can not found the page, please try again!</section>
     )
 }

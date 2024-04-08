@@ -18,8 +18,8 @@ export async function openAIMain<OpenAIProps>({topic, keywords}:OpenAIProps) {
         content: 'You are a blog generator',
     },{
         role:'user',
-        content: `Generate a long and detailed blog about ${topic} and ${keywords}, the ${keywords} are separated by comma. 
-            The response should be formatted in SEO friendly HTML tag, limited to the following HTML tags: p, h1, h2, h3, h4, h5, h6, strong, i, ul, li, ol.`
+        content: `Generate a long and detailed blog about ${topic} and ${keywords}, explain the concepts more detail. You can give some formatted code examples or scenario to help to understand the descriptions. the ${keywords} are separated by comma. 
+            The response should be formatted in SEO friendly HTML tag, limited to the following HTML tags: p, h1, h2, h3, h4, h5, h6, strong, i, ul, li, ol,dl.`
     }
     ];
 

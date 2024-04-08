@@ -46,10 +46,33 @@ body {
     p {
         @apply my-6 leading-loose
     }
+
+    ol {
+        li {
+            @apply my-2 leading-loose
+        }
+    }
+    ul {
+        li {
+            @apply my-2 leading-loose
+        }
+    }
 }
 
 @layer components {
     .btn {
        @apply w-full my-5 bg-green-500 uppercase hover:bg-green-600 disabled:cursor-not-allowed text-white font-bold py-2 px-4 rounded
     }
+    .loader {
+        width: fit-content;
+        font-weight: bold;
+        font-family: monospace;
+        font-size: 30px;
+        clip-path: inset(0 100% 0 0);
+        animation: l5 2s steps(11) infinite;
+    }
+    .loader:before {
+        content:"Generating..."
+    }
+    @keyframes l5 {to{clip-path: inset(0 -1ch 0 0)}}
 }

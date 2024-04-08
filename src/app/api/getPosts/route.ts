@@ -1,7 +1,6 @@
 import { connectDB } from '@/lib/connectedDB'
 import { getUserData } from '@/utils/getUserData'
 import { NextResponse } from 'next/server'
-import { IPost } from '@/models/Post'
 
 export async function GET(request: Request) {
     const {db} = await connectDB();

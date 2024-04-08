@@ -4,10 +4,16 @@ import { usePostContext } from './PostReducer'
 export type PostContextType = ReturnType<typeof usePostContext>
 
 const initPostContextState: PostContextType = {
+
     dispatch: () => {},
-    dispatchGeneratePost:() => {},
-    dispatchFetchPosts: () => {},
     posts: [],
+    popOverPostId: "",
+    dispatchFetchPosts: () => {},
+    dispatchGeneratePost: () => {},
+    dispatchDeletePost:() => {},
+    dispatchGetPostById:() => {},
+    dispatchPopOverPostId:() => {},
+    dispatchArchivePost:() => {}
 }
 
 type Children = { children?: ReactElement | ReactElement[] }

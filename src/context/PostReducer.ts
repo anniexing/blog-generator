@@ -37,7 +37,6 @@ export const postReducer = (
         }
 
         case PostActionType.ARCHIVE_POST: {
-            debugger;
             const posts = state.posts.filter(post => post._id !== action.payload.postId)
             return {...state, posts}
         }
@@ -64,6 +63,7 @@ export const usePostContext = () => {
 
     const dispatchArchivePost = useCallback((post:IPost) => dispatch({type: PostActionType.ARCHIVE_POST, payload: post}), [])
     return {
+        dispatch,
         posts,
         popOverPostId,
         dispatchFetchPosts,

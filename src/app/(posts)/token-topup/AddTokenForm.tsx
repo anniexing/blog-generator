@@ -46,6 +46,7 @@ const  AddTokenForm = () => {
                     type='number'
                     id='tokens'
                     step={10}
+                    min={0}
                     value={addedTokens}
                     className='w-full block border border-slate-500 my-2 px-4 py-2 rounded'
                     onChange={e => setAddedTokens(Number(e.target.value))} />

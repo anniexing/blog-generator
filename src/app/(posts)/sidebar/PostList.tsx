@@ -25,7 +25,6 @@ const PostList = () => {
 
     const handleArchivePost =(postId:string)=> {
         archivePost(postId).then(data => {
-            debugger;
             dispatchArchivePost(data);
             if(params.postId === postId) {
                 router.push("/post/new");
