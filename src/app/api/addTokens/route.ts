@@ -1,27 +1,36 @@
-import { getSession } from '@auth0/nextjs-auth0'
-import { connectDB } from '@/lib/connectedDB'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
+import { headers } from 'next/headers'
+import stripe from '@/config/stripe';
+import { getUserData } from '@/utils/getUserData'
+export async function POST(req:NextRequest, res: NextResponse){
+    const { user } = await getUserData();
+ const headersList = headers();
+ const { addedTokens }= await req.json();
+ const lineItems = [{
+     price: process.env.STRIPE_PRODUCT_PRICE_ID,
+     quantity: addedTokens ? addedTokens / 10 : 0,
+ }]
+    try {
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ["card"],
+            line_items: lineItems,
+            mode: "payment",
+            payment_intent_data: {
+                metadata: {
+                    sub: user?.sub,
+                    addedTokens,
+                },
+            },
+            metadata:{
+                sub: user?.sub,
+                addedTokens,
+            },
+            success_url: `${headersList.get("origin")}/token-topup/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${headersList.get("origin")}/`,
+        });
 
-export async function POST(request:Request){
-    const session = await getSession();
-    if(!session){
-        throw new Error("Authentication Required");
+        return NextResponse.json({sessionId: session.id});
+    } catch (err) {
+        return NextResponse.json({error: "Error creating checkout session"});
     }
-    const { user} = session;
-    const {db} = await connectDB();
-    const userProfile = await db.collection('users').updateOne({
-        auth0Id: user.sub
-    },{
-        $inc:{
-            availableTokens: 10
-        },
-        $setOnInsert:{
-         auth0Id: user.sub
-        }
-    },
-        {
-            upsert: true
-        }
-    );
-    return NextResponse.json({message:"Add Tokens successful "}, {status: 200})
 }

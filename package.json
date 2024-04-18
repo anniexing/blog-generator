@@ -3,32 +3,35 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.5.0",
-    "mongodb": "^6.3.0",
-    "next": "14.1.0",
-    "openai": "^4.8.0",
+    "@heroicons/react": "^2.1.3",
+    "@stripe/stripe-js": "^3.3.0",
+    "@types/micro-cors": "^0.1.5",
+    "mongodb": "^6.5.0",
+    "next": "14.1.4",
+    "openai": "^4.33.0",
     "prettier": "^3.2.5",
-    "react": "^18",
-    "react-dom": "^18",
-    "sass": "^1.71.0",
-    "stripe": "^14.17.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.74.1",
+    "stripe": "^15.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.1.0",
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.2.75",
+    "@types/react-dom": "^18.2.24",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.1.4",
     "eslint-config-prettier": "^9.1.0",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5"
   }
 }
