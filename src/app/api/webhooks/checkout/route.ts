@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import { NextRequest, NextResponse } from 'next/server'
 import stripe from "@/config/stripe";
 import { connectDB } from '@/lib/connectedDB'
+import Cors from 'micro-cors';
 
 export const config = {
     api: {
@@ -9,25 +10,30 @@ export const config = {
     }
 }
 
+const cors = Cors({
+    allowMethods: ['POST'],
+});
+
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
 
 const POST = async (req: NextRequest) => {
+    if (req.method !== 'POST') {
+        return NextResponse.json(null, { status: 405 });
+    }
     try {
         const body = await req.text();
-        const signature = headers().get("stripe-signature") || "";
+        const signature = req.headers.get("stripe-signature") || "";
         const event = stripe.webhooks.constructEvent(body, signature, endpointSecret);
-        console.log("event Type" + event.type);
         let paymentIntent = null;
         switch(event.type){
             case "checkout.session.completed": {
                 paymentIntent = event.data.object;
-
+                console.log('AUTH 0 ID: ', paymentIntent);
                 const auth0Id = paymentIntent.metadata?.sub;
-                console.log("auth0Id"+auth0Id);
                 const {db} = await connectDB();
                 const updateData = {
                     $inc: {
-                        availableTokens: paymentIntent.metadata?.addedTokens,
+                        availableTokens: Number(paymentIntent.metadata?.addedTokens),
                     },
                     $setOnInsert: {
                         auth0Id,

@@ -21,7 +21,11 @@ export default function SideBar(){
                            </svg>
                        </Link>
                    </div>
-                   <AvailableTokens />
+                   {/* TOTO in the next version
+                    <AvailableTokens />
+                    */}
+
+
                </div>
                <div className='flex-1 overflow-auto p-2 pt-0'>
                    <PostList />

@@ -15,6 +15,5 @@ export async function getUserData() {
         auth0Id: user.sub
     };
     const userProfile = await db.collection("users").findOne(filter);
-
     return {user, filter, userProfile}
 }

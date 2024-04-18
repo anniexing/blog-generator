@@ -19,8 +19,8 @@ const  AddTokenForm = () => {
             });
              const {sessionId} = await checkoutResponse.json();
              const stripeError = await stripe.redirectToCheckout({sessionId});
-             if (stripeError) {
-                 console.error(stripeError);
+             if (stripeError.error) {
+                 console.error(stripeError.error.message);
              }
         } catch (error) {
             console.log(error);

@@ -3,7 +3,7 @@ import { headers } from 'next/headers'
 import stripe from '@/config/stripe';
 import { getUserData } from '@/utils/getUserData'
 export async function POST(req:NextRequest, res: NextResponse){
-    const { userProfile } = await getUserData();
+    const { user } = await getUserData();
  const headersList = headers();
  const { addedTokens }= await req.json();
  const lineItems = [{
@@ -17,15 +17,15 @@ export async function POST(req:NextRequest, res: NextResponse){
             mode: "payment",
             payment_intent_data: {
                 metadata: {
-                    sub: userProfile?.sub,
+                    sub: user?.sub,
                     addedTokens,
                 },
             },
             metadata:{
-                sub: userProfile?.sub,
+                sub: user?.sub,
                 addedTokens,
             },
-            success_url: `${headersList.get("origin")}/token-topup/success`,
+            success_url: `${headersList.get("origin")}/token-topup/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${headersList.get("origin")}/`,
         });
 
