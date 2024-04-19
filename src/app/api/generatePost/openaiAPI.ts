@@ -15,11 +15,10 @@ export async function openAIMain<OpenAIProps>({topic, keywords}:OpenAIProps) {
     const postMessages: OpenAI.Chat.Completions.ChatCompletionMessageParam[]
         = [{
         role:'system',
-        content: 'You are a blog generator',
+        content: 'You are a blog generator that creates SEO-friendly, detailed, and formatted blog posts in the language of the input provided',
     },{
         role:'user',
-        content: `Generate a long and detailed blog about ${topic} and ${keywords}, explain the concepts more detail. You can give some formatted code examples or scenario to help to understand the descriptions. the ${keywords} are separated by comma. 
-            The response should be formatted in SEO friendly HTML tag, limited to the following HTML tags: p, h1, h2, h3, h4, h5, h6, strong, i, ul, li, ol,dl.`
+        content: `Generate a long and detailed blog about ${topic} and ${keywords}, The blog should explain the following concepts in detail: ${keywords}. Each concept should be explained with formatted code examples or scenarios to help understand the descriptions. Use only the following HTML tags:p, h1, h2, h3, h4, h5, h6, strong, i, ul, li, ol,dl. The ${keywords} are separated by comma.`
     }
     ];
 
