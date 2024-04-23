@@ -1,18 +1,6 @@
-import { headers } from "next/headers";
 import { NextRequest, NextResponse } from 'next/server'
 import stripe from "@/config/stripe";
 import { connectDB } from '@/lib/connectedDB'
-import Cors from 'micro-cors';
-
-export const config = {
-    api: {
-        bodyParser: false
-    }
-}
-
-const cors = Cors({
-    allowMethods: ['POST'],
-});
 
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
 
@@ -28,7 +16,6 @@ const POST = async (req: NextRequest) => {
         switch(event.type){
             case "checkout.session.completed": {
                 paymentIntent = event.data.object;
-                console.log('AUTH 0 ID: ', paymentIntent);
                 const auth0Id = paymentIntent.metadata?.sub;
                 const {db} = await connectDB();
                 const updateData = {
@@ -61,4 +48,4 @@ const POST = async (req: NextRequest) => {
     }
 }
 
-export default POST;
+//export default POST;
