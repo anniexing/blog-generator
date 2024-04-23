@@ -13,8 +13,7 @@ export default function Home() {
                 className="relative z-10 text-white px-10 py-5 text-center max-w-screen-sm bg-slate-900/90 rounded-md backdrop-blur-sm">
                 <Logo />
                 <p>
-                    The AI-powered SaaS solution to generate SEO-optimized blog posts in
-                    minutes. Get high-quality content, without sacrificing your time.
+                    Discover the power of our AI-driven SaaS solution that crafts SEO-optimized blog posts in just minutes. Achieve high-quality content effortlessly, saving you time and enhancing your digital presence.
                 </p>
                 <Link href="/post/new" className="btn text-left">
                     Start
