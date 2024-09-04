@@ -16,6 +16,7 @@ export default function Page() {
         event.preventDefault();
         setIsGenerating(true);
         generatePost({topic, keywords}).then(data => {
+            debugger;
             dispatchGeneratePost(data)
             if(data?.postId){
                 router.push(`/post/${data.postId}`)

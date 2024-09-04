@@ -8,9 +8,12 @@ interface OpenAIProps {
 const OPEN_AI_MODEL = "gpt-3.5-turbo";
 // @ts-ignore
 export async function openAIMain<OpenAIProps>({topic, keywords}:OpenAIProps) {
-    const openai = new OpenAI({
-        apiKey: process.env.OPENAI_API_KEY
-    });
+     const openai = new OpenAI(
+     {
+         apiKey: process.env.OPENAI_API_KEY
+     })
+
+
 
     const postMessages: OpenAI.Chat.Completions.ChatCompletionMessageParam[]
         = [{
