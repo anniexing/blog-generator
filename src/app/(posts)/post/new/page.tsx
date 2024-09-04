@@ -20,6 +20,7 @@ export default function Page() {
             if(data?.postId){
                 router.push(`/post/${data.postId}`)
             }
+
         }).finally(()=>{
             setIsGenerating(false);
         })
