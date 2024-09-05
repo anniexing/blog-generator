@@ -17,7 +17,7 @@ const nextConfig = {
             fullUrl: true,
         },
     },
-    async headers() {
+   /* async headers() {
         return [
             {
                 // matching all API routes
@@ -30,7 +30,7 @@ const nextConfig = {
                 ]
             }
         ]
-    }
+    }*/
 };
 
 export default nextConfig;

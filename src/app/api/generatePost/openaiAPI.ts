@@ -5,14 +5,10 @@ interface OpenAIProps {
     topic: string;
     keywords: string;
 }
-const OPEN_AI_MODEL = "gpt-3.5-turbo";
+const OPENAI_AI_MODEL = "gpt-4o";
 // @ts-ignore
 export async function openAIMain<OpenAIProps>({topic, keywords}:OpenAIProps) {
-     const openai = new OpenAI(
-     {
-         apiKey: process.env.OPENAI_API_KEY
-     })
-
+     const openai = new OpenAI({apiKey: process.env.OPENAI_API_KEY});
 
 
     const postMessages: OpenAI.Chat.Completions.ChatCompletionMessageParam[]
@@ -26,7 +22,7 @@ export async function openAIMain<OpenAIProps>({topic, keywords}:OpenAIProps) {
     ];
 
     const postResult:OpenAI.Chat.ChatCompletion = await openai.chat.completions.create({
-        model: OPEN_AI_MODEL,
+        model: OPENAI_AI_MODEL,
         messages: postMessages,
         temperature: 0,
     });
@@ -40,7 +36,7 @@ export async function openAIMain<OpenAIProps>({topic, keywords}:OpenAIProps) {
     ];
 
     const titleResult:OpenAI.Chat.ChatCompletion = await openai.chat.completions.create({
-        model: OPEN_AI_MODEL,
+        model: OPENAI_AI_MODEL,
         messages: titleMessages,
         temperature: 0,
     });
@@ -54,7 +50,7 @@ export async function openAIMain<OpenAIProps>({topic, keywords}:OpenAIProps) {
     ];
 
     const metaDescriptionResult:OpenAI.Chat.ChatCompletion = await openai.chat.completions.create({
-        model: OPEN_AI_MODEL,
+        model: OPENAI_AI_MODEL,
         messages: metaDescriptionMessages,
         temperature: 0,
     });

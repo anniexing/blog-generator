@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { headers } from 'next/headers'
 import stripe from '@/config/stripe';
 import { getUserData } from '@/utils/getUserData'
+
 export async function POST(req:NextRequest, res: NextResponse){
     const { user } = await getUserData();
  const headersList = headers();
