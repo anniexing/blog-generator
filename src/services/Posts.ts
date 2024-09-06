@@ -1,4 +1,5 @@
 import { IPost, IPostForm, ParamsProps } from '@/models/Post'
+import { notFound } from 'next/navigation'
 export async function generatePost({topic, keywords}:IPostForm) {
     try {
         const response = await fetch('/api/generatePost', {
@@ -8,6 +9,7 @@ export async function generatePost({topic, keywords}:IPostForm) {
             },
             body: JSON.stringify({topic, keywords}),
         })
+        if(!response) notFound();
         if (!response.ok) {
             throw new Error('Failed to submit the data. Please try again.')
         }

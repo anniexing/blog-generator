@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
+    distDir: "dist",
     images:{
+        unoptimized: true,
         remotePatterns:[
             {
                 protocol: 'https',
@@ -17,7 +19,7 @@ const nextConfig = {
             fullUrl: true,
         },
     },
-    async headers() {
+   /* async headers() {
         return [
             {
                 // matching all API routes
@@ -30,7 +32,7 @@ const nextConfig = {
                 ]
             }
         ]
-    }
+    }*/
 };
 
 export default nextConfig;

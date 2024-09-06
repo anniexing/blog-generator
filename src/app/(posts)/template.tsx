@@ -7,7 +7,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
     const { dispatchFetchPosts } = usePost();
     useEffect(() => {
         getPosts().then(data => {
-            dispatchFetchPosts(data.posts);
+            dispatchFetchPosts(data?.posts);
         })
     },[])
     return <div>{children}</div>
