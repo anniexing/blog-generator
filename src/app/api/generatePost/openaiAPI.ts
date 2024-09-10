@@ -6,6 +6,7 @@ interface OpenAIProps {
     keywords: string;
 }
 const OPENAI_AI_MODEL = "gpt-4o";
+const MAX_TOKENS = 3000;
 // @ts-ignore
 export async function openAIMain<OpenAIProps>({topic, keywords}:OpenAIProps) {
      const openai = new OpenAI({apiKey: process.env.OPENAI_API_KEY});
@@ -17,7 +18,7 @@ export async function openAIMain<OpenAIProps>({topic, keywords}:OpenAIProps) {
         content: 'You are a blog generator that creates SEO-friendly, detailed, and formatted blog posts in the language of the input provided',
     },{
         role:'user',
-        content: `Generate a long and detailed blog about ${topic} and ${keywords}, The blog should explain the following concepts in detail: ${keywords}. Each concept should be explained with formatted code examples or scenarios to help understand the descriptions. Use only the following HTML tags:p, h1, h2, h3, h4, h5, h6, strong, i, ul, li, ol,dl. The ${keywords} are separated by comma.`
+        content: `Generate a comprehensive and in-depth blog post about ${topic} focusing on the following key concepts: ${keywords}., The blog should explain the following concepts in detail: ${keywords}. Each concept should be explained with formatted code examples or scenarios to help understand the descriptions. Use only the following HTML tags:p, h1, h2, h3, h4, h5, h6, strong, i, ul, li, ol,dl. The ${keywords} are separated by comma.`
     }
     ];
 
@@ -25,6 +26,7 @@ export async function openAIMain<OpenAIProps>({topic, keywords}:OpenAIProps) {
         model: OPENAI_AI_MODEL,
         messages: postMessages,
         temperature: 0,
+        max_tokens: MAX_TOKENS
     });
 
     const postContent = postResult.choices[0]?.message.content;
