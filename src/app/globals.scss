@@ -44,17 +44,17 @@ body {
     }
 
     p {
-        @apply my-6 leading-loose
+        @apply my-6 leading-normal
     }
 
     ol {
         li {
-            @apply my-2 leading-loose
+            @apply my-2 leading-normal
         }
     }
     ul {
         li {
-            @apply my-2 leading-loose
+            @apply my-2 leading-normal
         }
     }
 }
@@ -73,6 +73,14 @@ body {
     }
     .loader:before {
         content:"Generating..."
+    }
+
+    aside {
+        ul {
+            li {
+                @apply my-1
+            }
+        }
     }
     @keyframes l5 {to{clip-path: inset(0 -1ch 0 0)}}
 }

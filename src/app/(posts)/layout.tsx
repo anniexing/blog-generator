@@ -1,15 +1,15 @@
 import React from 'react'
 import PostProvider from '@/app/PostProvider';
-import SideBar from '@/app/(posts)/sidebar/SideBar'
+import Toggle from '@/app/(posts)/sidebar/Toggle';
 export default function Layout({
 children,
 }: {
     children: React.ReactNode
 }) {
     return (
-        <section className="grid grid-cols-[260px_1fr] gap-0">
+        <section className="grid md:grid-cols-[260px_1fr] gap-0 ">
             <PostProvider>
-                <div><SideBar /></div>
+                <Toggle />
                 <div>{children}</div>
             </PostProvider>
         </section>

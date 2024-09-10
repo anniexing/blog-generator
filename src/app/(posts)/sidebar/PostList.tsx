@@ -40,7 +40,7 @@ const PostList = () => {
                     <div
                         className="group rounded-lg active:opacity-90 hover:bg-token-sidebar-surface-secondary">
                         <Link href={`/post/${post._id}`}
-                              className='flex items-center gap-2 p-2 @apply text-slate-700 text-base'>
+                              className='flex items-center gap-2 px-2 py-1 text-slate-700 text-base'>
                             <div className='relative flex-1 overflow-hidden whitespace-nowrap'>
                                 <span className='relative z-1 overflow-hidden'>{post?.topic}</span>
                                 <div
