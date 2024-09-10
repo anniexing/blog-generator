@@ -7,11 +7,14 @@ const [isOpen, setIsOpen] = useState(false);
 
 const getLocalDate = () => {
     const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+    const second = now.getSeconds();
 
-    //Get current date and time in local format
-    const localDateTime = now.toLocaleString();
-
-    return `${localDateTime}`;
+    return `${year}-${month}-${day} ${hour}:${minute}:${minute}`;
 }
 
     return (
@@ -24,7 +27,7 @@ const getLocalDate = () => {
                             d='M26 16a1 1 0 0 1-1 1H5a1 1 0 0 1 0-2h20a1 1 0 0 1 1 1ZM5 9h18a1 1 0 1 0 0-2H5a1 1 0 0 0 0 2Zm16 14H5a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2Z'></path>
                     </svg>
                 </button>
-                <span>{getLocalDate()}</span>
+                <span className=" self-center mr-5">{getLocalDate()}</span>
             </header>
 
             <aside className={`w-[260px] h-svh absolute transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0`}>
