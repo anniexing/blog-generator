@@ -16,7 +16,7 @@ const getLocalDate = () => {
 
     return (
         <>
-            <header className="sticky top-0 lfet-0 flex w-full md:hidden p-2 justify-between">
+            <header className="sticky top-0 lfet-0 flex w-full md:hidden p-2 bg-white justify-between">
                 <button className='flex-none ml-2 hover:bg-stone-200 rounded-sm' onClick={() => setIsOpen(!isOpen)}>
                     <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor'
                          viewBox='0 0 32 32'>
