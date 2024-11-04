@@ -15,12 +15,13 @@
     "@types/micro-cors": "^0.1.5",
     "franc": "^6.2.0",
     "mongodb": "^6.8.0",
-    "next": "^14.2.7",
+    "next": "14.2.10",
     "openai": "^4.57.1",
     "react": "^18.3.1",
     "react-dom": "^18.2.0",
     "sass": "^1.78.0",
     "save-dev": "^0.0.1-security",
+    "sharp": "^0.33.5",
     "stripe": "^16.10.0"
   },
   "devDependencies": {
