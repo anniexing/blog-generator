@@ -14,6 +14,9 @@ const nextConfig = {
         ]
 
     },
+    env: {
+        STRIPE_TEST_SECRET_KEY: process.env.STRIPE_TEST_SECRET_KEY,
+    },
     logging: {
         fetches: {
             fullUrl: true,
